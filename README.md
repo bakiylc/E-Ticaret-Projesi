@@ -1,4 +1,4 @@
-# E-Commerce Data Analysis Project | SQL & Power BI
+# E-Ticaret Veri Analizi Projesi | SQL & Power BI
 
 ![d1](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/dsh1.jpg)
 
