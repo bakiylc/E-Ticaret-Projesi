@@ -1,10 +1,10 @@
---Soru 1: Toplam sipariþ sayýsýný ve toplam satýþ tutarýný bulun.
+--Soru 1: Toplam sipariÃ¾ sayÃ½sÃ½nÃ½ ve toplam satÃ½Ã¾ tutarÃ½nÃ½ bulun.
 select 
 	COUNT(*) as SiparisSayisi,
 	SUM(TotalAmount) as ToplamTutar 
 from orders 
 
---Soru 2: Her kategorideki ürün sayýsýný listeleyin.
+--Soru 2: Her kategorideki Ã¼rÃ¼n sayÃ½sÃ½nÃ½ listeleyin.
 select 
 	count(ProductID) as urunsayisi , 
 	category 
@@ -12,7 +12,7 @@ from products
 group by category
 order by 1
 
---Soru 3: En yüksek toplam satýþa sahip 5 þehri bulun.
+--Soru 3: En yÃ¼ksek toplam satÃ½Ã¾a sahip 5 Ã¾ehri bulun.
 select TOP 5
 	SUM(o.TotalAmount) as toplam_tutar,
 	c.City as Sehir
@@ -21,8 +21,8 @@ INNER JOIN orders o ON c.CustomerID = o.CustomerID
 Group by c.City
 Order by 1 DESC
 
---Soru 4: 2024 yýlýnda verilen sipariþ sayýsýný bulun.
-select DATEPART(Year,OrderDate) as Yýl,
+--Soru 4: 2024 yÃ½lÃ½nda verilen sipariÃ¾ sayÃ½sÃ½nÃ½ bulun.
+select DATEPART(Year,OrderDate) as YÃ½l,
 COUNT(DISTINCT OrderID) as SiparisSayisi
 from Orders
 Where DATEPART(Year,OrderDate) = 2024
@@ -30,14 +30,14 @@ Group by DATEPART(Year,OrderDate)
 
 
 
---Soru 5: En pahalý 5 ürünü listeleyin.
+--Soru 5: En pahalÃ½ 5 Ã¼rÃ¼nÃ¼ listeleyin.
 SELECT TOP 5
       ProductName,
       UnitPrice
   FROM Products
   ORDER BY UnitPrice DESC;
 
---Soru 6: Her þehirdeki müþteri sayýsýný bulun.
+--Soru 6: Her Ã¾ehirdeki mÃ¼Ã¾teri sayÃ½sÃ½nÃ½ bulun.
 select 
 	COUNT(CustomerID) as MusteriSayisi , 
 	City 
@@ -45,7 +45,7 @@ from customers
 Group by City
 Order by 1 desc
 
---Soru 7: Elektronik kategorisindeki toplam satýþ tutarýný hesaplayýn.
+--Soru 7: Elektronik kategorisindeki toplam satÃ½Ã¾ tutarÃ½nÃ½ hesaplayÃ½n.
 select 
 	SUM(od.Quantity * od.UnitPrice)  as ToplamTutar,
 	p.Category
@@ -54,7 +54,7 @@ INNER JOIN products p ON p.ProductID = od.ProductID
 Where p.category = 'Elektronik'
 Group by p.Category
 
---Soru 8: En az 100 sipariþ veren müþterileri listeleyin.
+--Soru 8: En az 100 sipariÃ¾ veren mÃ¼Ã¾terileri listeleyin.
 Select 
 	COUNT(o.OrderID) as SiparisSayisi,
 	c.CustomerID,
@@ -64,10 +64,10 @@ INNER JOIN customers c ON o.CustomerID = c.CustomerID
 Group by c.CustomerID,c.CustomerName
 HAVING COUNT(o.OrderID) >= 100
 
---Soru 9: Ortalama sepet tutarýný hesaplayýn.
+--Soru 9: Ortalama sepet tutarÃ½nÃ½ hesaplayÃ½n.
 select AVG(TotalAmount) as OrtalamaAlisverisTutari from orders
 
---Soru 10: Haftanýn hangi günlerinde en çok sipariþ verilmiþ?
+--Soru 10: HaftanÃ½n hangi gÃ¼nlerinde en Ã§ok sipariÃ¾ verilmiÃ¾?
 select 
 	DATENAME(DW,OrderDate) as Gunler ,
 	Count(DISTINCT OrderID) as SiparisSayisi
@@ -75,23 +75,23 @@ from orders
 Group by DATENAME(DW,OrderDate)
   ORDER BY SiparisSayisi DESC;
 
---Soru 11: Her kategoride en çok satýlan ürünü bulun.
+--Soru 11: Her kategoride en Ã§ok satÃ½lan Ã¼rÃ¼nÃ¼ bulun.
 WITH CTE AS (
 select 
 SUM(od.Quantity) as SatilanUrunAdeti , 
 od.ProductID,
 p.Category,
-ROW_NUMBER() OVER (PARTITION BY p.Category ORDER BY SUM(od.Quantity) DESC) AS Sýra
+ROW_NUMBER() OVER (PARTITION BY p.Category ORDER BY SUM(od.Quantity) DESC) AS SÃ½ra
 from Order_Details od 
 INNER JOIN products p ON od.ProductID = p.ProductID
 Group by od.ProductID, p.Category
 )
 
 Select * from CTE 
-where Sýra = 1
+where SÃ½ra = 1
 order by 1 desc
 
---Soru 12: 2024’te her ayýn toplam satýþýný ve bir önceki aya göre büyüme oranýný hesaplayýn.
+--Soru 12: 2024â€™te her ayÃ½n toplam satÃ½Ã¾Ã½nÃ½ ve bir Ã¶nceki aya gÃ¶re bÃ¼yÃ¼me oranÃ½nÃ½ hesaplayÃ½n.
 WITH CTE AS (
     SELECT 
           YEAR(OrderDate) AS Yil,
@@ -112,7 +112,7 @@ CASE
 From CTE 
 Order by 2
 
---Soru 13: Ortalama sipariþ tutarýndan yüksek olan sipariþlerin sayýsýný bulun.
+--Soru 13: Ortalama sipariÃ¾ tutarÃ½ndan yÃ¼ksek olan sipariÃ¾lerin sayÃ½sÃ½nÃ½ bulun.
 WITH CTE AS (
 Select 
 AVG(TotalAmount) as OrtalamaSiparisTutari
@@ -125,7 +125,7 @@ From Orders o
 CROSS JOIN CTE 
 Where o.TotalAmount >= CTE.OrtalamaSiparisTutari
 
---Soru 14: Her müþterinin son sipariþ tarihini ve toplam harcama miktarýný listeleyin.
+--Soru 14: Her mÃ¼Ã¾terinin son sipariÃ¾ tarihini ve toplam harcama miktarÃ½nÃ½ listeleyin.
 SELECT 
       c.CustomerID,
       c.CustomerName,
@@ -136,7 +136,7 @@ SELECT
   GROUP BY c.CustomerID, c.CustomerName
   ORDER BY ToplamHarcama DESC;
 
---Soru 15: En çok satýlan 5 ürünü toplam adet ve gelir bazýnda sýralayýn.
+--Soru 15: En Ã§ok satÃ½lan 5 Ã¼rÃ¼nÃ¼ toplam adet ve gelir bazÃ½nda sÃ½ralayÃ½n.
 Select TOP 5
 	SUM(od.Quantity * od.UnitPrice) as ToplamTutar , 
 	SUM(od.Quantity) as SatilanToplamAdet , 
@@ -147,7 +147,7 @@ from order_details od INNER JOIN products pd ON pd.ProductID = od.ProductID
 Group by od.ProductID , pd.ProductName , pd.Category
 Order by ToplamTutar DESC , SatilanToplamAdet DESC
 
---Soru 16: Her þehirdeki ortalama sepet tutarýný hesaplayýn.
+--Soru 16: Her Ã¾ehirdeki ortalama sepet tutarÃ½nÃ½ hesaplayÃ½n.
 Select 
 	c.city,
 	AVG(o.totalamount) as OrtalamaTutar
@@ -155,7 +155,7 @@ from customers c
 INNER JOIN orders o ON c.CustomerID = o.CustomerID
 Group by c.city
 
---Soru 17: Hiç sipariþ vermeyen müþterileri listeleyin.
+--Soru 17: HiÃ§ sipariÃ¾ vermeyen mÃ¼Ã¾terileri listeleyin.
 SELECT 
       c.CustomerID,
       c.CustomerName
@@ -163,11 +163,11 @@ SELECT
   LEFT JOIN Orders o ON c.CustomerID = o.CustomerID
   WHERE o.OrderID IS NULL;
 
---Soru 18: 2024’te en az 10 sipariþ veren müþterilerin toplam harcamasýný hesaplayýn.
+--Soru 18: 2024â€™te en az 10 sipariÃ¾ veren mÃ¼Ã¾terilerin toplam harcamasÃ½nÃ½ hesaplayÃ½n.
 SELECT 
       c.CustomerID,
       c.CustomerName,
-	  YEAR(o.orderdate) as yýl,
+	  YEAR(o.orderdate) as yÃ½l,
 	  SUM(o.TotalAmount) as ToplamHarcama,
 	  Count(DISTINCT o.OrderID) as SiparisSayisi
   FROM Customers c
@@ -176,7 +176,7 @@ SELECT
  HAVING Count(DISTINCT o.OrderID) >= 10 and YEAR(o.orderdate) = 2024
  ORDER BY ToplamHarcama DESC;
 
---Soru 19: Her kategorideki ortalama ürün fiyatýný hesaplayýn.
+--Soru 19: Her kategorideki ortalama Ã¼rÃ¼n fiyatÃ½nÃ½ hesaplayÃ½n.
 SELECT 
       Category,
       AVG(UnitPrice) AS OrtalamaFiyat
@@ -184,7 +184,7 @@ SELECT
   GROUP BY Category
   ORDER BY OrtalamaFiyat DESC;
 
---Soru 20: Sipariþlerin % kaçý tek ürün içeriyor?
+--Soru 20: SipariÃ¾lerin % kaÃ§Ã½ tek Ã¼rÃ¼n iÃ§eriyor?
 WITH OrderItemCount AS (
     SELECT 
         OrderID,
@@ -219,8 +219,8 @@ CONVERT(decimal,COUNT(c1.UrunSayisi)) / Convert(decimal,COUNT(c2.UrunSayisi)) * 
 from CTE c1 RIGHT JOIN CTE2 c2 ON 
 c1.OrderID = c2.OrderID
 
---Soru 21: RFM Tablosunu Oluþturup RFM analizi ile en deðerli 100 müþteriyi bulun.
--- 1. Adým RFM Tablosunu Oluþturalým:
+--Soru 21: RFM Tablosunu OluÃ¾turup RFM analizi ile en deÃ°erli 100 mÃ¼Ã¾teriyi bulun.
+-- 1. AdÃ½m RFM Tablosunu OluÃ¾turalÃ½m:
 SELECT 
     c.CustomerID, 
     c.CustomerName,
@@ -235,8 +235,8 @@ FROM Orders o
 INNER JOIN Customers c ON o.CustomerID = c.CustomerID
 GROUP BY c.CustomerID, c.CustomerName;
 
--- Recency_score , Frequency_Score , Monetary_Score deðerlerini hesaplayalým:
--- Recency_Score Deðerini Hesaplayalým
+-- Recency_score , Frequency_Score , Monetary_Score deÃ°erlerini hesaplayalÃ½m:
+-- Recency_Score DeÃ°erini HesaplayalÃ½m
 
 WITH CTE_Score AS (
     SELECT
@@ -249,7 +249,7 @@ SET Recency_Score = CTE_Score.Score
 FROM RFM
 INNER JOIN CTE_Score ON RFM.CustomerID = CTE_Score.CustomerID;
 
---Frequency_Score Deðerini Hesaplayalým.
+--Frequency_Score DeÃ°erini HesaplayalÃ½m.
 WITH FrequencyCTE as (
 Select CustomerID , 
 NTILE(5) OVER(ORDER BY Frequency DESC) as Score
@@ -260,7 +260,7 @@ UPDATE RFM SET Frequency_Score = FrequencyCTE.Score
 FROM RFM
 INNER JOIN FrequencyCTE ON RFM.CustomerID = FrequencyCTE.CustomerID;
 
---Monetary_Score Deðerini Hesaplayalým.
+--Monetary_Score DeÃ°erini HesaplayalÃ½m.
 WITH Monetary_CTE as (
 Select CustomerID,
 NTILE(5) OVER(Order By Monetary DESC) as Score 
@@ -270,62 +270,62 @@ UPDATE RFM SET Monetary_Score = Monetary_CTE.Score
 FROM RFM
 INNER JOIN Monetary_CTE ON RFM.CustomerID = Monetary_CTE.CustomerID
 
--- RF_Score Deðerini Hesaplayalým
+-- RF_Score DeÃ°erini HesaplayalÃ½m
 ALTER TABLE RFM ADD RF_Score as
 CONVERT(Varchar,Recency_Score) + CONVERT(Varchar,Frequency_Score)
 
--- RFM_Score Deðerini Hesaplayalým
+-- RFM_Score DeÃ°erini HesaplayalÃ½m
 ALTER TABLE RFM ADD RFM_Score as
 CONVERT(Varchar,Recency_Score) + CONVERT(Varchar,Frequency_Score) + Convert(Varchar,Monetary_Score)
 
--- Müþteri Segmentasyonu Yapalým Elde Ettiðimiz Skorlarýn Anlamlý Hale Gelmesi Ýçin : 
+-- MÃ¼Ã¾teri Segmentasyonu YapalÃ½m Elde EttiÃ°imiz SkorlarÃ½n AnlamlÃ½ Hale Gelmesi ÃÃ§in : 
 
--- Segment Sütununu Oluþturalým:
+-- Segment SÃ¼tununu OluÃ¾turalÃ½m:
 ALTER TABLE RFM ADD Segment Varchar(50)
 
---Hibernating sýnýfýnýn oluþturulmasý
+--Hibernating sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT='Hibernating' 
 WHERE RECENCY_SCORE LIKE '[1-2]%' AND FREQUENCY_SCORE LIKE '[1-2]%'
 
---at Risk sýnýfýnýn oluþturulmasý
+--at Risk sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT='At Risk' 
 WHERE RECENCY_SCORE LIKE'[1-2]%' AND FREQUENCY_SCORE LIKE '[3-4]%'
 
--- Can't Loose sýnýfýnýn oluþturulmasý
+-- Can't Loose sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='cant_loose'
 WHERE RECENCY_SCORE LIKE '[1-2]%' AND FREQUENCY_SCORE LIKE '[5]%'
 
--- About to Sleep sýnýfýnýn oluþturulmasý
+-- About to Sleep sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='about_to_sleep'
 WHERE RECENCY_SCORE LIKE '[3]%' AND FREQUENCY_SCORE LIKE '[1-2]%'
 
--- Need Attention sýnýfýnýn oluþturulmasý
+-- Need Attention sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='need_attention'
 WHERE RECENCY_SCORE LIKE '[3]%' AND FREQUENCY_SCORE LIKE '[3]%'
 
--- Loyal Customers sýnýfýnýn oluþturulmasý
+-- Loyal Customers sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='loyal_customers'
 WHERE RECENCY_SCORE LIKE '[3-4]%' AND FREQUENCY_SCORE LIKE '[4-5]%'
 
--- Promising sýnýfýnýn oluþturulmasý
+-- Promising sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='promising'
 WHERE RECENCY_SCORE LIKE '[4]%' AND FREQUENCY_SCORE LIKE '[1]%'
 
--- New Customers sýnýfýnýn oluþturulmasý
+-- New Customers sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='new_customers'
 WHERE RECENCY_SCORE LIKE '[5]%' AND FREQUENCY_SCORE LIKE '[1]%'
 
--- Potential Loyalist sýnýfýnýn oluþturulmasý
+-- Potential Loyalist sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='potential_loyalists'
 WHERE RECENCY_SCORE LIKE '[4-5]%' AND FREQUENCY_SCORE LIKE '[2-3]%'
 
--- Champions sýnýfýnýn oluþturulmasý
+-- Champions sÃ½nÃ½fÃ½nÃ½n oluÃ¾turulmasÃ½
 UPDATE RFM SET SEGMENT ='champions'
 WHERE RECENCY_SCORE LIKE '[5]%' AND FREQUENCY_SCORE LIKE '[4-5]%'
 
 
 
--- 2. Adým En deðerli 100 Müþteriyi Listeleyelim:
+-- 2. AdÃ½m En deÃ°erli 100 MÃ¼Ã¾teriyi Listeleyelim:
 SELECT TOP 100 
     CustomerID,
     CustomerName,
@@ -341,7 +341,7 @@ FROM RFM
 ORDER BY RFM_Score DESC;
 
 
---Soru 22: Birlikte satýn alýnan ürün çiftlerini ve destek oranýný hesaplayýn.
+--Soru 22: Birlikte satÃ½n alÃ½nan Ã¼rÃ¼n Ã§iftlerini ve destek oranÃ½nÃ½ hesaplayÃ½n.
 WITH CTE AS (
 select
 	od1.OrderID,
@@ -362,7 +362,7 @@ FROM CTE
 Group by Product1, Product2
 Order by BirlikteSatinAlinmaSayisi DESC
 
---Soru 23: Müþteri kohort analizi ile ilk sipariþten sonraki aylarda aktif müþteri sayýsýný bulun.
+--Soru 23: MÃ¼Ã¾teri kohort analizi ile ilk sipariÃ¾ten sonraki aylarda aktif mÃ¼Ã¾teri sayÃ½sÃ½nÃ½ bulun.
 
 With FirstOrders as (
 Select 
@@ -390,7 +390,7 @@ From Cohorts
 Group by CohortYear,CohortMonth,SiparisFarkiIlkTarihten
 Order by CohortYear,CohortMonth,SiparisFarkiIlkTarihten
 
---Soru 24: Son 6 ayda sipariþ vermeyen müþterilerin (churn riski) toplam harcama geçmiþini bulun.
+--Soru 24: Son 6 ayda sipariÃ¾ vermeyen mÃ¼Ã¾terilerin (churn riski) toplam harcama geÃ§miÃ¾ini bulun.
 select 
 	c.CustomerID,
 	c.CustomerName,
@@ -403,7 +403,7 @@ Group by c.CustomerID, c.CustomerName
 HAVING DATEDIFF(DAY, MAX(o.OrderDate), GETDATE()) > 180 OR MAX(o.OrderDate) IS NULL
 ORDER BY SiparissizGecenGunFarki ASC;
 
---Soru 25: Her kategorideki satýþlarýn toplam satýþ içindeki payýný hesaplayýn.
+--Soru 25: Her kategorideki satÃ½Ã¾larÃ½n toplam satÃ½Ã¾ iÃ§indeki payÃ½nÃ½ hesaplayÃ½n.
 WITH CategorySales AS (
       SELECT 
           p.Category,
@@ -419,7 +419,7 @@ WITH CategorySales AS (
   FROM CategorySales
   ORDER BY SatisPayi DESC;
 
---Soru 26: Müþterilerin ilk ve son sipariþleri arasýndaki süre farkýný hesaplayýn.
+--Soru 26: MÃ¼Ã¾terilerin ilk ve son sipariÃ¾leri arasÃ½ndaki sÃ¼re farkÃ½nÃ½ hesaplayÃ½n.
 WITH CustomerOrders AS (
       SELECT 
           CustomerID,
@@ -438,14 +438,14 @@ WITH CustomerOrders AS (
   JOIN Customers c ON co.CustomerID = c.CustomerID
   ORDER BY AktifGunSayisi DESC;
 
---Soru 27: Her müþterinin en sýk satýn aldýðý ürün kategorisini bulun.
+--Soru 27: Her mÃ¼Ã¾terinin en sÃ½k satÃ½n aldÃ½Ã°Ã½ Ã¼rÃ¼n kategorisini bulun.
 WITH CustomerCategory AS (
       SELECT 
           c.CustomerID,
           c.CustomerName,
           p.Category,
           SUM(od.Quantity) AS ToplamAdet
-          --ROW_NUMBER() OVER (PARTITION BY c.CustomerID ORDER BY SUM(od.Quantity) DESC) AS Sýra
+          --ROW_NUMBER() OVER (PARTITION BY c.CustomerID ORDER BY SUM(od.Quantity) DESC) AS SÃ½ra
       FROM Order_Details od
       JOIN Products p ON od.ProductID = p.ProductID
       JOIN Orders o ON od.OrderID = o.OrderID
@@ -458,9 +458,9 @@ WITH CustomerCategory AS (
       Category,
       ToplamAdet
   FROM CustomerCategory
-  WHERE Sýra = 1
+  WHERE SÃ½ra = 1
   ORDER BY ToplamAdet DESC;
---Soru 28: Satýþlarýn %80’ini oluþturan ürünleri (Pareto analizi) bulun.
+--Soru 28: SatÃ½Ã¾larÃ½n %80â€™ini oluÃ¾turan Ã¼rÃ¼nleri (Pareto analizi) bulun.
 WITH ProductSales AS (
       SELECT 
           p.ProductName,
@@ -475,17 +475,17 @@ WITH ProductSales AS (
           ProductName,
           ToplamGelir,
           ToplamSatis,
-          SUM(ToplamGelir) OVER (ORDER BY ToplamGelir DESC ROWS UNBOUNDED PRECEDING) AS KümülatifGelir
+          SUM(ToplamGelir) OVER (ORDER BY ToplamGelir DESC ROWS UNBOUNDED PRECEDING) AS KÃ¼mÃ¼latifGelir
       FROM ProductSales
   )
   SELECT 
       ProductName,
       ToplamGelir,
-      (KümülatifGelir * 100.0 / ToplamSatis) AS KümülatifPay
+      (KÃ¼mÃ¼latifGelir * 100.0 / ToplamSatis) AS KÃ¼mÃ¼latifPay
   FROM CumulativeSales
-  WHERE KümülatifGelir <= 0.8 * ToplamSatis
+  WHERE KÃ¼mÃ¼latifGelir <= 0.8 * ToplamSatis
   ORDER BY ToplamGelir DESC;
---Soru 29: Her þehirdeki müþterilerin ortalama sipariþ sýklýðýný hesaplayýn.
+--Soru 29: Her Ã¾ehirdeki mÃ¼Ã¾terilerin ortalama sipariÃ¾ sÃ½klÃ½Ã°Ã½nÃ½ hesaplayÃ½n.
 WITH CustomerOrders AS (
       SELECT 
           c.City,
@@ -501,7 +501,7 @@ WITH CustomerOrders AS (
   FROM CustomerOrders
   GROUP BY City
   ORDER BY OrtalamaSiparisFrekansi DESC;
---Soru 30: Black Friday (2024 Kasým) döneminde en çok satýlan ürünleri ve önceki aya göre artýþ oranýný bulun.
+--Soru 30: Black Friday (2024 KasÃ½m) dÃ¶neminde en Ã§ok satÃ½lan Ã¼rÃ¼nleri ve Ã¶nceki aya gÃ¶re artÃ½Ã¾ oranÃ½nÃ½ bulun.
 WITH ProductSales AS (
       SELECT 
           p.ProductName,
