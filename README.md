@@ -77,18 +77,21 @@ Bu analiz, müşterilerin yaşadığı şehir ile verdikleri sipariş sayısı a
 Hangi yaş grubundan kaç müşterimiz olduğunu gösterir. Bu sayede şirketin hedef müşteri profili belirlenebilir ve yeni ürün satışları ile kampanyalar stratejik olarak planlanabilir.
 
 
-⚙️ **Kullanılan DAX Ölçümleri ve Fonksiyonlar**
+
+## ⚙️ **Kullanılan DAX Ölçümleri ve Fonksiyonlar**
 Bu projede analizlerin büyük bir kısmı SQL kullanılarak yapılmıştır. Bazı hesaplamalar ise DAX ile gerçekleştirilmiştir.
 SQL ile yapılan analizleri görmek için depo içerisindeki "Analiz.sql" dosyasını inceleyebilirsiniz.
 
 
-**🎯 Öne Çıkan Sonuçlar**
+
+## **🎯 Öne Çıkan Sonuçlar**
 Bu proje, satış dağılımı, aylık satış trendleri ve bölgelere göre sipariş sayısı gibi kritik müşteri ve satış metriklerini ortaya koymaktadır.
 Ürünler ve şehirlerle ilişkilendirilen gelir ve satış metrikleri sayesinde müşteri profilleri daha iyi anlaşılır.
 Şirketin yüksek değerli müşterilere ve sık sipariş veren müşteri segmentlerine odaklanmasını sağlar.
 
 
-**🚀 Bu Proje Nasıl Kullanılır?**
+
+## **🚀 Bu Proje Nasıl Kullanılır?**
 Depoyu klonlayın veya indirin.
 "E-Commerce Dashboard.pbix" dosyasını Power BI Desktop ile açın.
 Bu projede oluşturulan çeşitli panoları ve raporları keşfedin.
