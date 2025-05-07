@@ -1,10 +1,10 @@
-# E-Commerce Data Analysis Project | Power BI
+# E-Commerce Data Analysis Project | SQL & Power BI
 
-![d1](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/d1.jpg)
+![d1](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/dsh1.jpg)
 
-![d2](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/d2.jpg)
+![d2](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/dsh2.jpg)
 
-![d3](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/d3.jpg)
+![d3](https://raw.githubusercontent.com/bakiylc/E-Ticaret-Projesi/refs/heads/main/dsh3.jpg)
 
 
 ## 🚀 Overview
@@ -81,7 +81,7 @@ It allows the company to focus on customer segments and identify high-value cust
 
 **🚀 How to Use This Project**
 Clone or download the repository.
-Open the Dashboard.pbix file in Power BI Desktop.
+Open the "E-Commerce Dashboard.pbix" file in Power BI Desktop.
 Explore the various dashboards and reports created in this project.
 Customize and modify the analysis or add new data as needed.
 Feel free to tweak the existing visualizations and DAX calculations to fit your own data needs or project requirements.
